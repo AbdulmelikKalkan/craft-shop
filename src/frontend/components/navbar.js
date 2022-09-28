@@ -32,6 +32,7 @@ export default function Navigation() {
       css={{
         background: "inherit",
       }}
+      className="fixed"
     >
       <Navbar.Toggle showIn="xs" />
       <Navbar.Brand css={{ mr: "$4" }}>
