@@ -1,0 +1,16 @@
+version: '3'
+## to run 'docker-compose -f docker-compose.production.yml up --build --force-recreate'
+services:
+  app:
+    image: craft-shop
+    build:
+      context: ./src/frontend/
+      dockerfile: Dockerfile.production
+    ports:
+      - 3000:3000
+    # volumes:
+    #   - ./src/frontend/components:/app/components
+    #   - ./src/frontend/data:/app/data
+    #   - ./src/frontend/pages:/app/pages
+    #   - ./src/frontend/public:/app/public
+    #   - ./src/frontend/styles:/app/styles

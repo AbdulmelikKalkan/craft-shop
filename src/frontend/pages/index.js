@@ -2,14 +2,22 @@ import Main from "../components/main";
 import CardLayer from "../components/card";
 import { Image, Grid } from "@nextui-org/react";
 import { useEffect } from "react";
-
+import {products} from '../data/products'
 let count = -1;
-export default function Home({ products }) {
+export default function Home() {
   useEffect(() => {
     count = -1;
   });
   const getProduct = () => {
     count = count + 1;
+    // Using for production
+    // return (
+    //   <CardLayer
+    //     src={products[count].src}
+    //     title={products[count].title}
+    //     price={products[count].price}
+    //   ></CardLayer>
+    // );
     return (
       <CardLayer
         src={products[count].src}
@@ -57,13 +65,13 @@ export default function Home({ products }) {
     </Main>
   );
 }
-export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/products");
-  const products = await res.json();
-  console.log("getStaticProps");
-  return {
-    props: {
-      products,
-    }, // will be passed to the page component as props
-  };
-}
+// export async function getStaticProps() {
+//   const res = await fetch("http://localhost:3000/api/products");
+//   const products = await res.json();
+//   console.log("getStaticProps");
+//   return {
+//     props: {
+//       products,
+//     }, // will be passed to the page component as props
+//   };
+// }
