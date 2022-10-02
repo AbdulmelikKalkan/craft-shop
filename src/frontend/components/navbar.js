@@ -2,17 +2,18 @@ import {
   Navbar,
   Text,
   Button,
-  Link,
   Dropdown,
   Avatar,
   Input,
   Badge,
 } from "@nextui-org/react";
 import { SearchIcon } from "./searchIcon";
-
+import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
 
+import { useSession, signIn, signOut } from "next-auth/react";
 export default function Navigation() {
+  const { data: session } = useSession();
   const collapseItems = [
     "Profile",
     "Dashboard",
@@ -25,6 +26,66 @@ export default function Navigation() {
     "Help & Feedback",
     "Log Out",
   ];
+  const getSession = () => {
+    if (session) {
+      return (
+        <Dropdown placement="bottom-right">
+          <Navbar.Item>
+            <Dropdown.Trigger>
+              {/* <Avatar
+                bordered
+                as="button"
+                color="warning"
+                size="md"
+                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              /> */}
+              <Avatar text="AK" size="md" color="gradient" textColor="white" />
+            </Dropdown.Trigger>
+          </Navbar.Item>
+          <Dropdown.Menu
+            aria-label="User menu actions"
+            color="warning"
+            onAction={(actionKey) => console.log({ actionKey })}
+          >
+            <Dropdown.Item key="profile" css={{ height: "$18" }}>
+              <Text b color="inherit" css={{ d: "flex" }}>
+                Signed in as
+              </Text>
+              <Text b color="inherit" css={{ d: "flex" }}>
+              {session.user.email}
+              </Text>
+            </Dropdown.Item>
+            <Dropdown.Item key="settings" withDivider>
+              My Settings
+            </Dropdown.Item>
+            <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
+            <Dropdown.Item key="analytics" withDivider>
+              Analytics
+            </Dropdown.Item>
+            <Dropdown.Item key="system">System</Dropdown.Item>
+            <Dropdown.Item key="configurations">Configurations</Dropdown.Item>
+            <Dropdown.Item key="help_and_feedback" withDivider>
+              Help & Feedback
+            </Dropdown.Item>
+            <Dropdown.Item key="logout" withDivider color="error">
+              {/* <Link href="/auth/signout">
+                <a onClick={() => signOut()}><b>Logout</b></a>
+              </Link> */}
+              <a className="text-current font-bold" onClick={() => signOut()}><b>Logout</b></a>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      );
+    }
+    return (
+      <Navbar.Item>
+        <Link href="auth/signin">
+          {/* <a className="text-current font-bold" onClick={() => signIn()}><b>Login</b></a> */}
+          <a className="text-current font-bold"><b>Login</b></a>
+        </Link>
+      </Navbar.Item>
+    );
+  };
   return (
     <Navbar
       isBordered
@@ -85,11 +146,12 @@ export default function Navigation() {
           />
         </Navbar.Item>
         <Navbar.Item>
-          <Badge color='error' size='sm' content={2} shape="rectangle">
+          <Badge color="error" size="sm" content={2} shape="rectangle">
             <FiShoppingCart className="w-6 h-6" />
           </Badge>
         </Navbar.Item>
-        <Dropdown placement="bottom-right">
+        {getSession()}
+        {/* <Dropdown placement="bottom-right">
           <Navbar.Item>
             <Dropdown.Trigger>
               <Avatar
@@ -130,7 +192,7 @@ export default function Navigation() {
               Log Out
             </Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown> */}
       </Navbar.Content>
       <Navbar.Collapse>
         {collapseItems.map((item, index) => (
