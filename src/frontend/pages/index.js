@@ -7,20 +7,20 @@ import { useSession, getSession, signIn, signOut } from "next-auth/react"
 import { unstable_getServerSession } from "next-auth/next"
 import { authOptions } from "./api/auth/[...nextauth]"
 import { getToken } from "next-auth/jwt"
-
+import useSWR from 'swr'
 
 let count = -1;
 const secret = process.env.NEXTAUTH_SECRET
+
 export default function Home() {
   const { data: session } = useSession()
+  const t = {
+    key: '/api/products',
+    method: 'post',
+  }
   useEffect(() => {
     count = -1;
-    // const fetchData = async () => {
-    //   const res = await fetch("/api/gettoken")
-    //   const json = await res.json()
-    //   console.log("gettoken: ", json);
-    // }
-    // fetchData()
+    
   });
   const getProduct = () => {
     count = count + 1;
@@ -40,9 +40,6 @@ export default function Home() {
     //   ></CardLayer>
     // );
   };
-  console.log("session: ", session);
-  console.log("data: ", useSession());
-  console.log("get: ", getSession());
   const getUser = () => {
     if (session) {
       return (
@@ -95,14 +92,7 @@ export default function Home() {
 }
 
 // export async function getStaticProps() {
-//   const res = await fetch("http://localhost:3000/api/products");
-//   const products = await res.json();
-//   console.log("getStaticProps");
-//   return {
-//     props: {
-//       products,
-//     }, // will be passed to the page component as props
-//   };
+  
 // }
 // Export the `session` prop to use sessions with Server Side Rendering
 // export async function getServerSideProps(context) {

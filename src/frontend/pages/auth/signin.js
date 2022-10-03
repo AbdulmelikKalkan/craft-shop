@@ -19,11 +19,12 @@ export default function SignIn({ csrfToken }) {
                   initialValue={csrfToken}
                   className="hidden"
                 />
-                <Input name="username" placeholder="Username" size="lg" />
+                <Input name="username" placeholder="Username" initialValue="jack" size="lg" />
                 <Spacer />
                 <Input.Password
                   name="password"
                   placeholder="Password"
+                  initialValue="sparrow"
                   size="lg"
                 />
                 <Spacer />

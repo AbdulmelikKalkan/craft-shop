@@ -1,7 +1,6 @@
 import {
   Navbar,
   Text,
-  Button,
   Dropdown,
   Avatar,
   Input,
@@ -14,6 +13,14 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useSession, signIn, signOut } from "next-auth/react";
 export default function Navigation() {
   const { data: session } = useSession();
+  const getFirstChar = (username) => {
+    let code = "";
+    let nameslice = username.split(" ");
+    for (let i in nameslice) {
+      code = code + nameslice[i].charAt(0).toUpperCase();
+    }
+    return code;
+  };
   const collapseItems = [
     "Profile",
     "Dashboard",
@@ -32,14 +39,7 @@ export default function Navigation() {
         <Dropdown placement="bottom-right">
           <Navbar.Item>
             <Dropdown.Trigger>
-              {/* <Avatar
-                bordered
-                as="button"
-                color="warning"
-                size="md"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              /> */}
-              <Avatar text="AK" size="md" color="gradient" textColor="white" />
+              <Avatar text={getFirstChar(session.user.name)} size="md" color="gradient" textColor="white" />
             </Dropdown.Trigger>
           </Navbar.Item>
           <Dropdown.Menu
@@ -52,7 +52,7 @@ export default function Navigation() {
                 Signed in as
               </Text>
               <Text b color="inherit" css={{ d: "flex" }}>
-              {session.user.email}
+                {session.user.email}
               </Text>
             </Dropdown.Item>
             <Dropdown.Item key="settings" withDivider>
@@ -71,7 +71,9 @@ export default function Navigation() {
               {/* <Link href="/auth/signout">
                 <a onClick={() => signOut()}><b>Logout</b></a>
               </Link> */}
-              <a className="text-current font-bold" onClick={() => signOut()}><b>Logout</b></a>
+              <a className="text-current font-bold" onClick={() => signOut()}>
+                <b>Logout</b>
+              </a>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
@@ -81,7 +83,9 @@ export default function Navigation() {
       <Navbar.Item>
         <Link href="auth/signin">
           {/* <a className="text-current font-bold" onClick={() => signIn()}><b>Login</b></a> */}
-          <a className="text-current font-bold"><b>Login</b></a>
+          <a className="text-current font-bold">
+            <b>Login</b>
+          </a>
         </Link>
       </Navbar.Item>
     );
@@ -151,48 +155,6 @@ export default function Navigation() {
           </Badge>
         </Navbar.Item>
         {getSession()}
-        {/* <Dropdown placement="bottom-right">
-          <Navbar.Item>
-            <Dropdown.Trigger>
-              <Avatar
-                bordered
-                as="button"
-                color="warning"
-                size="md"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
-            </Dropdown.Trigger>
-          </Navbar.Item>
-          <Dropdown.Menu
-            aria-label="User menu actions"
-            color="warning"
-            onAction={(actionKey) => console.log({ actionKey })}
-          >
-            <Dropdown.Item key="profile" css={{ height: "$18" }}>
-              <Text b color="inherit" css={{ d: "flex" }}>
-                Signed in as
-              </Text>
-              <Text b color="inherit" css={{ d: "flex" }}>
-                zoey@example.com
-              </Text>
-            </Dropdown.Item>
-            <Dropdown.Item key="settings" withDivider>
-              My Settings
-            </Dropdown.Item>
-            <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
-            <Dropdown.Item key="analytics" withDivider>
-              Analytics
-            </Dropdown.Item>
-            <Dropdown.Item key="system">System</Dropdown.Item>
-            <Dropdown.Item key="configurations">Configurations</Dropdown.Item>
-            <Dropdown.Item key="help_and_feedback" withDivider>
-              Help & Feedback
-            </Dropdown.Item>
-            <Dropdown.Item key="logout" withDivider color="error">
-              Log Out
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown> */}
       </Navbar.Content>
       <Navbar.Collapse>
         {collapseItems.map((item, index) => (
