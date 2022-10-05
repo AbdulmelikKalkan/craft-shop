@@ -1,16 +1,41 @@
 version: '3'
 ## to run 'docker-compose -f docker-compose.production.yml up --build --force-recreate'
 services:
-  app:
-    image: craft-shop
-    build:
-      context: ./src/frontend/
+  auth:
+    image: authservice
+    build: 
+      context: ./src/authservice/
       dockerfile: Dockerfile.production
     ports:
-      - 3000:3000
-    # volumes:
-    #   - ./src/frontend/components:/app/components
-    #   - ./src/frontend/data:/app/data
-    #   - ./src/frontend/pages:/app/pages
-    #   - ./src/frontend/public:/app/public
-    #   - ./src/frontend/styles:/app/styles
+      - 8080:8080
+  # api:
+  #   image: kong:3.0.0-alpine
+  #   container_name: kong
+  #   environment:
+  #     KONG_DATABASE: 'off'
+  #     KONG_PROXY_ACCESS_LOG: '/dev/stdout'
+  #     KONG_ADMIN_ACCESS_LOG: '/dev/stdout'
+  #     KONG_PROXY_ERROR_LOG: '/dev/stderr'
+  #     KONG_ADMIN_ERROR_LOG: '/dev/stderr'
+  #     KONG_ADMIN_LISTEN: '0.0.0.0:8001, 0.0.0.0:8444 ssl'
+  #     KONG_DECLARATIVE_CONFIG: '/opt/kong/kong.yaml'
+  #   ports:
+  #     - 8000:8000
+  #     - 8443:8443
+  #     - 8001:8001
+  #     - 8444:8444
+  #   volumes:
+  #     - ./src/apigateway:/opt/kong
+  # frontend:
+  #   image: craft-shop
+  #   build:
+  #     context: ./src/frontend/
+  #     dockerfile: Dockerfile.production
+  #   ports:
+  #     - 3000:3000
+  #   # volumes:
+  #   #   - ./src/frontend/components:/app/components
+  #   #   - ./src/frontend/data:/app/data
+  #   #   - ./src/frontend/pages:/app/pages
+  #   #   - ./src/frontend/public:/app/public
+  #   #   - ./src/frontend/styles:/app/styles

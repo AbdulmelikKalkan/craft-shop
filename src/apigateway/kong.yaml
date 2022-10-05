@@ -1,0 +1,22 @@
+ _format_version: "3.0"
+ _transform: true
+
+ services:
+ - host: auth-dev
+   name: auth_service
+   port: 8080
+   protocol: http
+   routes:
+   - name: auth_route
+     paths:
+     - /auth
+     strip_path: true
+ - host: mockbin.org
+   name: example_service
+   port: 80
+   protocol: http
+   routes:
+   - name: example_route
+     paths:
+     - /mock
+     strip_path: true
