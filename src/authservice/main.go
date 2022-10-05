@@ -36,7 +36,7 @@ func main() {
 	fmt.Println("Hello Auth Service")
 
 	http.HandleFunc("/", root)
-	http.HandleFunc("/auth", auth)
+	http.HandleFunc("/login", auth)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatalf("There was an error listening port :8080 %v", err)
@@ -50,7 +50,7 @@ func (c client) isEmpty() bool {
 
 func auth(w http.ResponseWriter, r *http.Request) {
 	var c client
-
+	fmt.Println("Hit to /login")
 	// Check if token exist in the request header
 	if r.Header["Token"] != nil {
 		// Parse Token
@@ -94,12 +94,15 @@ func auth(w http.ResponseWriter, r *http.Request) {
 			log.Printf("unauthorized client, %v", c.username)
 			w.WriteHeader(http.StatusUnauthorized)
 		}
+	} else {
+		w.WriteHeader(http.StatusBadRequest)
 	}
 
 }
 
 func root(w http.ResponseWriter, r *http.Request) {
 	// Forbidden to access root
+	fmt.Println("Hit to /")
 	w.WriteHeader(http.StatusForbidden)
 }
 
