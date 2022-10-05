@@ -27,7 +27,7 @@ export const authOptions = {
 
         const jwttoken = jwt.sign({ username: credentials.username, password: credentials.password, csrfToken: credentials.csrfToken }, secret, { expiresIn: '7d' });
         
-        const authorizedToken = await fetch("http://localhost:8080/auth", {
+        const authorizedToken = await fetch("http://kong-dev:8000/auth/login", {
             method: 'POST',
             // body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json", "Token": jwttoken }
