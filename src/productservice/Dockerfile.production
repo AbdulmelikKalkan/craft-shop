@@ -1,0 +1,17 @@
+FROM golang:1.19.2-alpine as builder
+
+WORKDIR /src
+# restore dependencies
+COPY go.sum go.mod ./
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=0 go build -o /productservice .
+
+# Production image, copy all the files and run binary
+FROM scratch
+
+WORKDIR /src
+COPY --from=builder /productservice ./productservice
+ENTRYPOINT [ "/src/productservice" ]

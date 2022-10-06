@@ -1,6 +1,12 @@
 version: '3'
 ## to run 'docker-compose up --build --force-recreate'
 services:
+  product:
+    image: productservice-dev
+    container_name: product-dev
+    build: ./src/productservice
+    ports:
+      - 8090:8090
   auth:
     image: authservice-dev
     container_name: auth-dev
