@@ -11,12 +11,12 @@
      paths:
      - /auth
      strip_path: true
- - host: mockbin.org
-   name: example_service
-   port: 80
+ - host: product-dev
+   name: product_service
+   port: 8090
    protocol: http
    routes:
-   - name: example_route
+   - name: product_route
      paths:
-     - /mock
+     - /product
      strip_path: true
