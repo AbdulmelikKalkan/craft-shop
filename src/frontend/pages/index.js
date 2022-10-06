@@ -74,7 +74,8 @@ export default function Home({ products }) {
 }
 
 export async function getStaticProps(context) {
-  const res = await fetch('http://product-dev:8090/get')
+  const apiGateway = process.env.API_GATEWAY
+  const res = await fetch('http://'+ apiGateway +'/product/get')
   const products = await res.json()
   return {
     props: {

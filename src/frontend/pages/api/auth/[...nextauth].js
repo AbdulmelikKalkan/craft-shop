@@ -4,6 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const jwt = require("jsonwebtoken");
 const secret = process.env.NEXTAUTH_SECRET
 const apiSecret = process.env.AUTH_SECRET
+const apiGateway = process.env.API_GATEWAY
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -27,7 +28,7 @@ export const authOptions = {
 
         const jwttoken = jwt.sign({ username: credentials.username, password: credentials.password, csrfToken: credentials.csrfToken }, secret, { expiresIn: '7d' });
         
-        const authorizedToken = await fetch("http://kong-dev:8000/auth/login", {
+        const authorizedToken = await fetch("http://" + apiGateway + "/auth/login", {
             method: 'POST',
             // body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json", "Token": jwttoken }
