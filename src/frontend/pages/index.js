@@ -11,7 +11,7 @@ export default function Home({ products }) {
   // useEffect(() => {
   //   console.log("useState")
   // }, []);
-  console.log(products);
+  
   const getProduct = () => {
     count = count + 1
     return (
