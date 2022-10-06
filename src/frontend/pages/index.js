@@ -1,44 +1,26 @@
 import Main from "../components/main";
 import CardLayer from "../components/card";
 import { Image, Grid } from "@nextui-org/react";
-import { useEffect } from "react";
-import {products} from '../data/products'
-import { useSession, getSession, signIn, signOut } from "next-auth/react"
-import { unstable_getServerSession } from "next-auth/next"
-import { authOptions } from "./api/auth/[...nextauth]"
-import { getToken } from "next-auth/jwt"
-import useSWR from 'swr'
+import { useEffect, useState } from "react";
 
-let count = -1;
-const secret = process.env.NEXTAUTH_SECRET
+import { useSession } from "next-auth/react"
 
-export default function Home() {
+let count = 0
+export default function Home({ products }) {
   const { data: session } = useSession()
-  const t = {
-    key: '/api/products',
-    method: 'post',
-  }
-  useEffect(() => {
-    count = -1;
-    
-  });
+  // useEffect(() => {
+  //   console.log("useState")
+  // }, []);
+  console.log(products);
   const getProduct = () => {
-    count = count + 1;
-    // Using for production
-    // return (
-    //   <CardLayer
-    //     src={products[count].src}
-    //     title={products[count].title}
-    //     price={products[count].price}
-    //   ></CardLayer>
-    // );
-    // return (
-    //   <CardLayer
-    //     src={products[count].src}
-    //     title={products[count].title}
-    //     price={products[count].price}
-    //   ></CardLayer>
-    // );
+    count = count + 1
+    return (
+      <CardLayer
+        src={products[count % Object.keys(products).length].src}
+        title={products[count % Object.keys(products).length].title}
+        price={products[count % Object.keys(products).length].price}
+      ></CardLayer>
+    );
   };
   const getUser = () => {
     if (session) {
@@ -91,24 +73,12 @@ export default function Home() {
   );
 }
 
-// export async function getStaticProps() {
-  
-// }
-// Export the `session` prop to use sessions with Server Side Rendering
-// export async function getServerSideProps(context) {
-//   const t = await unstable_getServerSession(
-//     context.req,
-//     context.res,
-//     authOptions
-//   )
-//   const res = await fetch("http://localhost:3000/api/get-token-example")
-//   const json = await res.json()
-//   console.log("gettoeken: ", json);
-//   console.log("serverside");
-//   console.log(t)
-//   return {
-//     props: {
-//       hola: 'hola',
-//     },
-//   }
-// }
+export async function getStaticProps(context) {
+  const res = await fetch('http://product-dev:8090/get')
+  const products = await res.json()
+  return {
+    props: {
+      products: products.products
+    }
+  }
+}
