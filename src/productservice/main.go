@@ -46,7 +46,6 @@ func getProduct(w http.ResponseWriter, r *http.Request) {
 	for _, v := range parseProduct() {
 		id := fmt.Sprint(v["id"])
 		if id == productId {
-			fmt.Println(v)
 			b, _ := json.Marshal(v)
 			w.Write(b)
 		}
