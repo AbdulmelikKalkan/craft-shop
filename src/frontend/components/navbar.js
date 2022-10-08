@@ -39,7 +39,12 @@ export default function Navigation() {
         <Dropdown placement="bottom-right">
           <Navbar.Item>
             <Dropdown.Trigger>
-              <Avatar text={getFirstChar(session.user.name)} size="md" color="gradient" textColor="white" />
+              <Avatar
+                text={getFirstChar(session.user.name)}
+                size="md"
+                color="gradient"
+                textColor="white"
+              />
             </Dropdown.Trigger>
           </Navbar.Item>
           <Dropdown.Menu
@@ -101,9 +106,11 @@ export default function Navigation() {
     >
       <Navbar.Toggle showIn="xs" />
       <Navbar.Brand css={{ mr: "$4" }}>
-        <Text b color="inherit" hideIn="xs">
-          CRAFT SHOP
-        </Text>
+        <Link href="/">
+          <Text b color="inherit" hideIn="xs">
+            <a>CRAFT SHOP</a>
+          </Text>
+        </Link>
       </Navbar.Brand>
       {/* <Navbar.Content enableCursorHighlight activeColor="warning" hideIn="xs" variant="highlight-rounded">
         <Navbar.Link isActive href="#">

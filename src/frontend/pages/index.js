@@ -32,7 +32,7 @@ export default function Home({ products }) {
       <Grid.Container gap={3} justify="center">
         {products.map((p) => (
           <Grid xs={12} sm={4}>
-            <CardLayer src={p.src} title={p.title} price={p.price}></CardLayer>
+            <CardLayer id={p.id} src={p.src} title={p.title} price={p.price}></CardLayer>
           </Grid>
         ))}
       </Grid.Container>
@@ -72,7 +72,7 @@ export async function getStaticProps(context) {
   const products = await res.json();
   return {
     props: {
-      products: products.products,
+      products: products,
     },
   };
 }

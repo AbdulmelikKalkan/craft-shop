@@ -1,12 +1,21 @@
 import { Card, Col, Row, Text } from "@nextui-org/react";
 import { useState, useEffect } from "react";
+import Router from "next/router";
 
 export default function CardLayer(props) {
-  const onPress = () => {
-    alert("pressed");
+  const onPress = (e) => {
+    console.log(e.target.id);
+    Router.push("product/" + e.target.id);
   };
   return (
-    <Card isPressable isHoverable  variant="flat" css={{ w: "100%" }} onPress={onPress} >
+    <Card
+      id={props.id}
+      isPressable
+      isHoverable
+      variant="flat"
+      css={{ w: "100%" }}
+      onPress={onPress}
+    >
       <Card.Body css={{ p: 0 }}>
         <Card.Image
           src={props.src}
