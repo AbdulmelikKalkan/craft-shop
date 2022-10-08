@@ -48,6 +48,7 @@ func (c client) isEmpty() bool {
 	return c.username == "" || c.password == ""
 }
 
+// auth checks Token and authenticate client
 func auth(w http.ResponseWriter, r *http.Request) {
 	var c client
 	fmt.Println("Hit to /login")
@@ -126,6 +127,7 @@ func generateJWT(n string, e string) (string, error) {
 
 // authorize client
 func authorize(c *client) (string, string) {
+	// TODO: Database (PostgreSQL) Implementation
 	if c.username == "jack" && c.password == "sparrow" {
 		return "Jack Sparrow", "jack@sparrow.com"
 	}
