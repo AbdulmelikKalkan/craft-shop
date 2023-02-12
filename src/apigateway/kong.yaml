@@ -20,3 +20,12 @@
      paths:
      - /product
      strip_path: true
+ - host: cart-dev
+   name: cart_service
+   port: 9000
+   protocol: http
+   routes:
+   - name: cart_route
+     paths:
+     - /cart
+     strip_path: true

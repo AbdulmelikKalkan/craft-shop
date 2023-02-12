@@ -18,6 +18,11 @@ export const authOptions = {
         // username: { label: "Username", type: "text", placeholder: "jsmith" },
         // password: { label: "Password", type: "password" },
       },
+      session: {
+        generateSessionToken: () => {
+          return randomUUID?.() ?? randomBytes(32).toString("hex")
+        }
+      },
       async authorize(credentials, req) {
         // You need to provide your own logic here that takes the credentials
         // submitted and returns either a object representing a user or value

@@ -1,8 +1,11 @@
 import { withAuth } from "next-auth/middleware";
+import { NextResponse, NextRequest } from 'next/server'
+
 
 export default withAuth(
   // `withAuth` augments your `Request` with the user's token.
   function middleware(req) {
+    req.cookies.set('vercel', 'fast')
     console.log(req.nextauth.token);
   },
   {
@@ -10,6 +13,7 @@ export default withAuth(
       authorized: ({ req, token }) => {
         // `/admin` requires admin role
         if (req.nextUrl.pathname === "/admin") {
+          
           return token?.role === "admin";
         }
         
@@ -20,5 +24,11 @@ export default withAuth(
   }
 );
 
-// export const config = { matcher: ["/admin"] };
-export const config = { matcher: ["/admin", "/me"] }
+// export function middleware(req) {
+//   const response = NextResponse.next()
+//   console.log("Hele bu nedir");
+//   return response
+// }
+
+export const config = { matcher: ["/admin"] };
+//export const config = { matcher: ["/cart"] }

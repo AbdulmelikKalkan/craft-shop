@@ -13,6 +13,19 @@ services:
     build: ./src/authservice/
     ports:
       - 8080:8080
+  redis:
+    image: redis:alpine
+    container_name: redis-dev
+    ports:
+      - 6379:6379
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+  cart:
+    image: cartservice-dev
+    container_name: cart-dev
+    build: ./src/cartservice/
+    ports:
+      - 9000:9000
   api:
     image: kong:3.0.0-alpine
     container_name: kong-dev
