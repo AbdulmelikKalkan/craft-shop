@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-redis/redis/v9"
+	"github.com/redis/go-redis/v9"
 )
 
 var ctx = context.Background()
@@ -121,3 +121,14 @@ func insertCart(key string, value []byte) error {
 	}
 	return nil
 }
+
+// [
+//     "product",
+//     "test1",
+//     "test",
+//     "1c7ae222d93167731da5051b73efd4e7cd6715ba64bbd03decadd3ca1c563846",
+//     "5d270fa8e7d43861a5e12cab7280c83c8541ebcbcdc526b0307fd5c8a232821d",
+//     "",
+//     "294954b5ff21285d47669b98ee1a738e5b97c67ae89588f34953ea0358f9bd10",
+//     "jack@sparrow.com"
+// ]

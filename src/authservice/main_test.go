@@ -8,11 +8,11 @@ import (
 
 // TestIsEmpty is basic check on the isEmpty Method
 func TestIsEmpty(t *testing.T) {
-	c := client{}
+	c := user{}
 	if !c.isEmpty() {
 		t.Errorf("TestIsEmpty: isEmpty not equal to true")
 	}
-	c = client{username: "testuser", password: "testpassword", csrfToken: "exampleToken"}
+	c = user{username: "testuser", password: "testpassword"}
 	if c.isEmpty() {
 		t.Errorf("TestIsEmpty: isEmpty not equal to false")
 	}

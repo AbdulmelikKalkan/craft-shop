@@ -1,6 +1,12 @@
  _format_version: "3.0"
  _transform: true
 
+ plugins:
+ - name: custom-auth
+   config:
+     introspection_endpoint: http://auth-dev:8080/verify
+     token_header: Authorization
+
  services:
  - host: auth-dev
    name: auth_service
