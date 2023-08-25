@@ -25,3 +25,22 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer components {
+  .navbar-bg {
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .navbar-input {
+    display: block;
+    width: 100%;
+    padding: 0.25rem;
+    padding-left: 2.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(17 24 39);
+    border-width: 1px;
+    border-radius: 0.5rem;
+    border-color: rgb(71 85 105);
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  }
+}
