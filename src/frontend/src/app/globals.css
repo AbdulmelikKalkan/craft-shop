@@ -30,6 +30,9 @@ body {
   .navbar-bg {
     background: rgba(255, 255, 255, 0.7);
   }
+  .card-bg {
+    background: rgba(255, 255, 255, 0.4);
+  }
   .navbar-input {
     display: block;
     width: 100%;
