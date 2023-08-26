@@ -3,7 +3,7 @@ import { FiShoppingCart, FiSearch } from "react-icons/fi";
 
 const Navigation = () => {
   return (
-    <nav className="fixed mx-2 md:mx-8 left-0 right-0 mt-1 md:mt-2 rounded-lg border navbar-bg shadow-xl backdrop-blur-md backdrop-saturate-150">
+    <nav className="fixed mx-2 md:mx-8 left-0 right-0 mt-1 md:mt-2 rounded-lg border navbar-bg shadow-xl backdrop-blur-md backdrop-saturate-150 z-50">
       <ul className="flex gap-2 text-md md:text-lg text-slate-900 my-2 md:my-4 items-center px-2">
         <li className="font-bold grow">
           <Link href="/">Craft Shop</Link>
