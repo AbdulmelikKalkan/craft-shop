@@ -3,7 +3,7 @@ import ProductCard from '@/components/productCard/ProductCard'
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen pb-4">
+    <main className="flex flex-col min-h-screen pb-28">
       <div>
         <Image src='/banner-clothes.jpg' className='w-full' width={960} height={600} alt='banner' />
       </div>
