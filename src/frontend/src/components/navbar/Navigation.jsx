@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { Input, Badge } from "@nextui-org/react";
 import { FiShoppingCart, FiSearch } from "react-icons/fi";
 
 const Navigation = () => {
@@ -9,16 +11,42 @@ const Navigation = () => {
           <Link href="/">Craft Shop</Link>
         </li>
         <li className="relative">
-          <div class="absolute pointer-events-auto inset-y-0 left-0 flex items-center pl-3">
-            <FiSearch />
-          </div>
-          <input type="search" placeholder="Search" className="navbar-input text-sm focus:ring-blue-500 focus:border-blue-500" />
+          <Input
+            isClearable
+            radius="lg"
+            classNames={{
+              label: "text-black/50 dark:text-white/90",
+              input: [
+                "bg-transparent",
+                "text-black/90 dark:text-white/90",
+                "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+              ],
+              innerWrapper: "bg-transparent",
+              inputWrapper: [
+                "shadow-xl",
+                "bg-default-200/50",
+                "dark:bg-default/60",
+                "backdrop-blur-xl",
+                "backdrop-saturate-200",
+                "hover:bg-default-200/70",
+                "border",
+                "border-slate-400",
+                "dark:hover:bg-default/70",
+                "group-data-[focused=true]:bg-default-200/50",
+                "dark:group-data-[focused=true]:bg-default/60",
+                "!cursor-text",
+              ],
+            }}
+            placeholder="Type to search..."
+            startContent={
+              <FiSearch className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-auto flex-shrink-0" />
+            }
+          />
         </li>
         <li className="relative inline-flex items-center mx-4">
-          <FiShoppingCart className="w-6 h-6" />
-          <div className="absolute scale-100 translate-x-3 -translate-y-3 inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-600 border-2 border-white rounded-full dark:border-gray-900">
-            20
-          </div>
+          <Badge content="9" color="danger">
+            <FiShoppingCart className="w-6 h-6" />
+          </Badge>
         </li>
         <li className="font-bold">Login</li>
       </ul>
