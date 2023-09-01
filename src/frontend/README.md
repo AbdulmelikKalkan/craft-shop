@@ -37,5 +37,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Dependencies
 - @nextui-org/react framer-motion
 - react-icons
-- @headlessui/react
-- @heroicons/react
