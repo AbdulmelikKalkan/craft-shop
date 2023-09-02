@@ -1,7 +1,13 @@
+'use client'
 import Image from 'next/image'
 import ProductCard from '@/components/productCard/ProductCard'
 
+import { useSession, getSession } from "next-auth/react"
+
 export default function Home() {
+  const { data: session, status } = useSession()
+  console.log(session)
+  console.log(status)
   return (
     <main className="flex flex-col min-h-screen pb-28">
       <div>
